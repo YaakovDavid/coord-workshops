@@ -26,7 +26,7 @@
 /******************************************* Constants *******************************************/
 
 // Your Coord API key.
-var COORD_API_KEY = '$API_KEY';
+var COORD_API_KEY = 'J9nS6_sUXPETyeoAUaGJ2mLkaGqQJ8aup2hylyuJHBg';
 var ROUTING_API_URL = 'https://api.coord.co/v1/routing/route';
 var NY_CENTER = {lat: 40.7301, lng: -73.9937};
 
@@ -111,10 +111,23 @@ function handleMapClick(event) {
     addFeature(event.latLng);
     headlineElement.innerHTML = 'TODO: Call Coord\'s Routing API to get routes!';
 
-    var url = ''; // TODO: Format Coord Routing API URL.
+    var url = `https://api.coord.co/v1/routing/route?origin_latitude=${origin.lat()}&origin_longitude=${origin.lng()}&destination_latitude=${destination.lat()}&destination_longitude=${destination.lng()}&modes=bus%2Cmetro%2Cbike&num_options=3&priority=soon&time=2018-06-27T22%3A01%3A46.155Z&time_mode=depart&bike_systems=CapitalBikeShare%2CJumpDC%2CMobikeDC%2CSpinDC%2CofoDC&access_key=${COORD_API_KEY}`; // TODO: Format Coord Routing API URL.
     getRequest(url).then(function(response) {
-      // TODO: Render routes.
+console.log(response);
+
+
+      renderTrips(response.trips)
     });
+     //console.log(handleMapClick());
+console.log(origin.lat());
+console.log(origin.lng());
+console.log(destination.lat());
+console.log(destination.lng());
+console.log(COORD_API_KEY);
+console.log(url);
+
+
+
 
     // Set the map's bounds to match the origin and destination.
     var bounds = new google.maps.LatLngBounds();
@@ -129,6 +142,9 @@ function handleMapClick(event) {
     clearElement.style.display = 'block';
   }
 }
+
+  //console.log(renderTrips());
+
 
 /** Reset all options. */
 function reset() {
